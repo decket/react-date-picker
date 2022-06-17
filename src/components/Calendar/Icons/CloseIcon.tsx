@@ -7,11 +7,11 @@ export const CloseIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
     xmlns="http://www.w3.org/2000/svg"
     {...props}>
     <g filter="url(#filter0_d_925_1672)">
-      <path d="M15 14L57 56M57 14L15 56" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M15 14L57 56M57 14L15 56" stroke="currentColor" strokeWidth="8" strokeLinecap="round" strokeLinejoin="round" />
     </g>
     <defs>
-      <filter id="filter0_d_925_1672" x="11" y="10" width="52" height="52" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+      <filter id="filter0_d_925_1672" x="11" y="10" width="52" height="52" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+        <feFlood floodOpacity="0" result="BackgroundImageFix" />
         <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
         <feOffset dx="1" dy="1" />
         <feGaussianBlur stdDeviation="0.5" />
