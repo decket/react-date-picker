@@ -1,10 +1,9 @@
-import { useEffect, useState } from 'react';
-import '../../assets/styles/Calendar/Calendar.scss';
+import { useRef, useEffect, useState } from 'react';
+import './Calendar.scss';
 import { DateTime } from 'luxon';
 import { buildCalendar } from './build';
 import { LeftArrow } from './Icons/LeftArrow';
 import { RightArrow } from './Icons/RightArrow';
-import { CloseIcon } from './Icons/CloseIcon';
 
 export type CalendarArrayType = Array<Array<DateTime>>;
 
@@ -15,6 +14,21 @@ interface CalendarProps {
 }
 
 export const Calendar: React.FC<CalendarProps> = ({ type }) => {
+  const wrapperRef = useRef<HTMLElement>(null);
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (wrapperRef.current && !wrapperRef.current.contains(event.target as HTMLElement)) {
+        console.log('OutSide click');
+      }
+    }
+    // Bind the event listener
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      // Unbind the event listener on clean up
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [wrapperRef]);
+
   const [currentDate, setCurrentDate] = useState<DateTime>(DateTime.now());
   const [calendar, setCalendar] = useState<CalendarArrayType>([]);
 
@@ -84,21 +98,11 @@ export const Calendar: React.FC<CalendarProps> = ({ type }) => {
   }
 
   return (
-    <section className='Calendar-workplace'>
-      <div className="header-container">
-        {firstSelectedDate ? (<div className="dateBlock">{firstSelectedDate.toFormat('dd-MM-yyyy')}</div>) : null}
-        {secondSelectedDate ? (<div className="horizontalLine"></div>) : null}
-        {secondSelectedDate ? (<div className="dateBlock">{secondSelectedDate.toFormat('dd-MM-yyyy')}</div>) : null}
-
-        <div className='closeIcon' onClick={clearDates}>
-          <CloseIcon />
-        </div>
-      </div>
-
+    <section ref={wrapperRef} className='Calendar-workplace'>
       <div className='calendar-container'>
         <div className='month-container'>
+          <span className='currentMonthWithYear'>{currentDate.toFormat('LLLL')} <span className='year'>{currentDate.toFormat('yyyy')}</span></span>
           <LeftArrow onClick={() => changeMonth(-1)} />
-          <span className='currentMonth'>{currentDate.toFormat('LLLL yyyy')}</span>
           <RightArrow onClick={() => changeMonth(1)} />
         </div>
 

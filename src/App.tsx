@@ -6,7 +6,7 @@ function App() {
 
   return (
     <div className="App">
-      <Calendar type={calendarType} />
+      {calendarType === 'single' ? <Calendar type={calendarType} /> : null}
 
       <div className='calendarType'>
         <div className={`button${calendarType === 'single' ? ' active' : ''}`} onClick={() => setCalendarType('single')}>Single</div>
